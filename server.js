@@ -37,12 +37,18 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const isProd = process.env.NODE_ENV === 'production';
+if (isProd) {
+  app.set('trust proxy', 1);
+}
+
 app.use(session({
   secret: 'tvk-digital-super-secret-key-2026',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set to true in HTTPS production
+    secure: isProd, // True on Render HTTPS
+    sameSite: isProd ? 'none' : 'lax', // Permissive cross-origin session on Vercel/Render
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 }));
