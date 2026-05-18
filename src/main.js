@@ -66,7 +66,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 })
 
 // Grievance Form Handling
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 const grievanceForm = document.getElementById('grievance-form')
 const formSuccess = document.getElementById('form-success')
