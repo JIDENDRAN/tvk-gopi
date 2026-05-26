@@ -904,3 +904,379 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ============================= */
+/* GLOBAL RESPONSIVE FIXES */
+/* ============================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================= */
+/* LARGE TABLETS */
+/* ============================= */
+
+@media (max-width: 1024px) {
+
+  .hero-container,
+  .vision-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    order: 2;
+  }
+
+  .hero-img {
+    order: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .leader-portrait-card {
+    margin: 0 auto;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .promise-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 20px;
+  }
+
+  .contact-row-secondary {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .logo-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .news-carousel-viewport .news-card {
+    flex: 0 0 calc(50% - 15px);
+  }
+}
+
+/* ============================= */
+/* MOBILE DEVICES */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  /* Header */
+  header {
+    padding: 10px 0 !important;
+  }
+
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 1rem !important;
+  }
+
+  .logo-text {
+    font-size: 1.2rem !important;
+    text-align: center;
+  }
+
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    gap: 14px !important;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 140px 0 70px;
+    min-height: auto;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 1.2rem;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.3rem;
+    line-height: 1.1;
+  }
+
+  .hero-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .hero-content .subtitle {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-img img {
+    border-radius: 20px;
+  }
+
+  /* Vision */
+  #vision {
+    padding: 70px 0 !important;
+  }
+
+  .vision-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 0 1.2rem;
+  }
+
+  .vision-text-side h2 {
+    font-size: 2rem !important;
+  }
+
+  .leader-portrait-card {
+    max-width: 100%;
+  }
+
+  .leader-info-box {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 20px;
+  }
+
+  .leader-info-box h3 {
+    font-size: 1.2rem;
+  }
+
+  /* News */
+  #news {
+    padding: 70px 0 !important;
+  }
+
+  .news-tabs-container {
+    gap: 10px;
+  }
+
+  .news-tab {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+
+  .news-carousel-viewport {
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .news-carousel-viewport .news-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .carousel-control {
+    display: none;
+  }
+
+  .news-content {
+    padding: 20px;
+  }
+
+  .news-title {
+    font-size: 1.1rem;
+  }
+
+  /* Services */
+  .service-section {
+    margin-top: -40px;
+  }
+
+  .service-panel {
+    border-radius: 25px;
+    margin: 0 1rem;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    padding: 25px 20px;
+  }
+
+  .service-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .icon-circle {
+    min-width: 70px;
+    width: 70px;
+    height: 70px;
+  }
+
+  /* Values */
+  #values {
+    padding: 70px 0 !important;
+  }
+
+  .value-card {
+    padding: 30px 20px !important;
+  }
+
+  /* Grievance */
+  .grievance-section {
+    padding: 70px 0;
+  }
+
+  .grievance-card {
+    margin: 0 1rem;
+  }
+
+  .grievance-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .grievance-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .grievance-form {
+    padding: 25px 20px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn {
+    font-size: 1rem;
+  }
+
+  /* Promise */
+  .promise-items {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .promise-unit {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 20px;
+  }
+
+  .promise-unit:last-child {
+    border-bottom: none;
+  }
+
+  /* Footer */
+  .logo-footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .contact-row-secondary {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .call-pill {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+  }
+
+  .call-pill .num {
+    font-size: 1.7rem;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  h2 {
+    font-size: 1.8rem !important;
+  }
+
+  p {
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+  }
+}
+
+/* ============================= */
+/* SMALL MOBILE */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+  .hero-content h1 {
+    font-size: 1.9rem !important;
+  }
+
+  .vision-text-side h2 {
+    font-size: 1.7rem !important;
+  }
+
+  .leader-info-box {
+    padding: 18px;
+  }
+
+  .news-title {
+    font-size: 1rem;
+  }
+
+  .panel-title-pill {
+    font-size: 0.7rem;
+    padding: 8px 18px;
+  }
+
+  .call-pill .num {
+    font-size: 1.4rem;
+  }
+}
