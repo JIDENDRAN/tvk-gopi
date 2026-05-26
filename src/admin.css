@@ -469,6 +469,31 @@
   white-space: pre-line;
 }
 
+.grievance-photo-box {
+  background-color: #fff7ed;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #fed7aa;
+}
+
+.grievance-photo-box img {
+  display: block;
+  width: min(100%, 420px);
+  max-height: 280px;
+  object-fit: contain;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: 1px solid #f3f4f6;
+  background: white;
+}
+
+.grievance-photo-box p {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 0.9rem;
+  word-break: break-word;
+}
+
 .modal-divider {
   border: 0;
   height: 1px;

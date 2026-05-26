@@ -23,19 +23,29 @@ db.exec(`
     constituency TEXT NOT NULL,
     category TEXT NOT NULL,
     description TEXT NOT NULL,
+    photo_data TEXT DEFAULT '',
+    photo_name TEXT DEFAULT '',
     status TEXT DEFAULT 'Pending',
     admin_notes TEXT DEFAULT '',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )
 `);
 
+const grievanceColumns = db.prepare("PRAGMA table_info(grievances)").all().map(column => column.name);
+if (!grievanceColumns.includes('photo_data')) {
+  db.exec("ALTER TABLE grievances ADD COLUMN photo_data TEXT DEFAULT ''");
+}
+if (!grievanceColumns.includes('photo_name')) {
+  db.exec("ALTER TABLE grievances ADD COLUMN photo_name TEXT DEFAULT ''");
+}
+
 // Middleware
 app.use(cors({
   origin: true,
   credentials: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '6mb' }));
+app.use(express.urlencoded({ extended: true, limit: '6mb' }));
 
 const isProd = process.env.NODE_ENV === 'production';
 if (isProd) {
@@ -57,6 +67,11 @@ app.use(session({
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = '123';
 
+let instagramCache = {
+  fetchedAt: 0,
+  data: []
+};
+
 // Middleware to check if logged in
 const requireAuth = (req, res, next) => {
   if (req.session && req.session.isAdmin) {
@@ -69,18 +84,30 @@ const requireAuth = (req, res, next) => {
 // API: Submit Grievance
 app.post('/api/grievances', (req, res) => {
   try {
-    const { name, phone, constituency, category, description } = req.body;
+    const { name, phone, constituency, category, description, photoData, photoName } = req.body;
     
     if (!name || !phone || !constituency || !category || !description) {
       return res.status(400).json({ success: false, message: 'All fields are required.' });
     }
 
+    if (photoData && !String(photoData).startsWith('data:image/')) {
+      return res.status(400).json({ success: false, message: 'Only image uploads are allowed.' });
+    }
+
     const insertStmt = db.prepare(`
-      INSERT INTO grievances (name, phone, constituency, category, description)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO grievances (name, phone, constituency, category, description, photo_data, photo_name)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    const result = insertStmt.run(name, phone, constituency, category, description);
+    const result = insertStmt.run(
+      name,
+      phone,
+      constituency,
+      category,
+      description,
+      photoData || '',
+      photoName || ''
+    );
     const id = result.lastInsertRowid;
     
     // Generate an elegant, tracking ID
@@ -127,6 +154,64 @@ app.get('/api/admin/status', (req, res) => {
     res.json({ success: true, loggedIn: true });
   } else {
     res.json({ success: true, loggedIn: false });
+  }
+});
+
+// API: Instagram media feed for development page
+app.get('/api/instagram/media', async (req, res) => {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const instagramUserId = process.env.INSTAGRAM_USER_ID;
+
+  if (!accessToken || !instagramUserId) {
+    return res.json({
+      success: false,
+      message: 'Instagram API is not configured. Add INSTAGRAM_USER_ID and INSTAGRAM_ACCESS_TOKEN.',
+      data: []
+    });
+  }
+
+  const cacheAge = Date.now() - instagramCache.fetchedAt;
+  if (instagramCache.data.length > 0 && cacheAge < 10 * 60 * 1000) {
+    return res.json({ success: true, source: 'cache', data: instagramCache.data });
+  }
+
+  try {
+    const fields = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp';
+    const graphUrl = new URL(`https://graph.facebook.com/v20.0/${instagramUserId}/media`);
+    graphUrl.searchParams.set('fields', fields);
+    graphUrl.searchParams.set('limit', '8');
+    graphUrl.searchParams.set('access_token', accessToken);
+
+    const response = await fetch(graphUrl);
+    const result = await response.json();
+
+    if (!response.ok) {
+      console.error('Instagram API error:', result);
+      return res.status(502).json({
+        success: false,
+        message: result.error?.message || 'Instagram API request failed.',
+        data: []
+      });
+    }
+
+    const media = (result.data || []).map(item => ({
+      id: item.id,
+      caption: item.caption || 'Instagram update',
+      mediaType: item.media_type,
+      mediaUrl: item.media_type === 'VIDEO' ? item.thumbnail_url : item.media_url,
+      permalink: item.permalink,
+      timestamp: item.timestamp
+    })).filter(item => item.mediaUrl && item.permalink);
+
+    instagramCache = {
+      fetchedAt: Date.now(),
+      data: media
+    };
+
+    res.json({ success: true, source: 'instagram', data: media });
+  } catch (error) {
+    console.error('Error fetching Instagram media:', error);
+    res.status(500).json({ success: false, message: 'Unable to fetch Instagram media.', data: [] });
   }
 });
 

@@ -363,6 +363,23 @@ function openDetailsModal(id) {
   });
   document.getElementById('modal-date').textContent = dateStr;
   document.getElementById('modal-description').textContent = currentGrievance.description;
+
+  const photoBox = document.getElementById('modal-photo-box');
+  const photoImg = document.getElementById('modal-photo');
+  const photoLink = document.getElementById('modal-photo-link');
+  const photoName = document.getElementById('modal-photo-name');
+
+  if (currentGrievance.photo_data) {
+    photoImg.src = currentGrievance.photo_data;
+    photoLink.href = currentGrievance.photo_data;
+    photoName.textContent = currentGrievance.photo_name || 'Uploaded grievance photo';
+    photoBox.hidden = false;
+  } else {
+    photoImg.removeAttribute('src');
+    photoLink.href = '#';
+    photoName.textContent = '';
+    photoBox.hidden = true;
+  }
   
   // Inputs
   document.getElementById('modal-status').value = currentGrievance.status;
