@@ -575,6 +575,10 @@
       padding: 0 2rem;
     }
 
+    .instagram-panel > div {
+      min-width: 0;
+    }
+
     .instagram-profile-card {
       background: linear-gradient(135deg, #111 0%, var(--poster-red) 100%);
       color: white;
@@ -654,11 +658,15 @@
 
     .instagram-carousel-wrap {
       position: relative;
+      width: 100%;
+      overflow: hidden;
     }
 
     .instagram-feed-grid {
       display: flex;
       gap: 18px;
+      width: 100%;
+      max-width: 100%;
       overflow-x: auto;
       scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
@@ -749,6 +757,7 @@
     .instagram-update-card {
       flex: 0 0 calc(50% - 9px);
       min-width: calc(50% - 9px);
+      max-width: calc(50% - 9px);
       background: #fffaf0;
       border: 1px solid rgba(198, 21, 27, 0.12);
       border-radius: 12px;
@@ -912,6 +921,7 @@
       .instagram-update-card {
         flex-basis: 88%;
         min-width: 88%;
+        max-width: 88%;
       }
 
       .instagram-carousel-control {
