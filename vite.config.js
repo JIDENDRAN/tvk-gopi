@@ -15,6 +15,9 @@ export default defineConfig({
       input: {
         main: './index.html',
         admin: './admin.html',
+        developments: './developments.html',
+        services: './services.html',
+        ideology: './ideology.html',
       }
     }
   }
