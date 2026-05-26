@@ -1397,12 +1397,12 @@ img {
 
   /* Header */
   header {
-    padding: 10px 0 !important;
+    padding: 10px 0 8px !important;
   }
 
   header .container {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     padding: 0 1rem !important;
   }
 
@@ -1412,12 +1412,14 @@ img {
   }
 
   .nav-links {
-    width: 100%;
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
     overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 8px;
-    gap: 14px !important;
+    justify-content: space-between;
+    padding: 0 1rem 8px;
+    gap: 12px !important;
     scrollbar-width: none;
+    box-sizing: border-box;
   }
 
   .nav-links::-webkit-scrollbar {
@@ -1427,52 +1429,73 @@ img {
   .nav-links a {
     font-size: 0.72rem !important;
     white-space: nowrap;
+    flex: 0 0 auto;
   }
 
   /* Hero */
   .hero {
-    padding: 120px 0 48px;
+    padding: 72px 0 28px;
     min-height: auto;
   }
 
   .hero-container {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 1.2rem;
+    gap: 20px;
+    padding: 0 1rem;
     text-align: center;
   }
 
   .hero-content h1 {
-    font-size: 2.3rem;
-    line-height: 1.1;
+    font-size: 2rem;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
   }
 
   .hero-content h2 {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
   }
 
   .hero-content .subtitle {
     border-left: none;
     padding-left: 0;
+    margin-bottom: 0;
   }
 
-  .hero-english-copy,
-  .hero-actions,
-  .hero-img {
-    display: none !important;
+  .hero-content .subtitle .tamil-text {
+    font-size: 1.08rem !important;
+    line-height: 1.45;
+  }
+
+  .hero-english-copy {
+    display: block !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55;
+    margin-top: 0.7rem;
   }
 
   .hero-actions {
     flex-direction: column;
     align-items: center;
+    gap: 12px !important;
+    margin-top: 1.2rem !important;
   }
 
   .hero-actions a {
     width: 100%;
     justify-content: center;
+    font-size: 0.82rem !important;
+    padding: 11px 18px !important;
+  }
+
+  .hero-img {
+    display: block !important;
   }
 
   .hero-img img {
+    width: min(100%, 320px);
+    margin: 0 auto;
+    display: block;
     border-radius: 20px;
   }
 
@@ -1675,7 +1698,7 @@ img {
 @media (max-width: 480px) {
 
   .hero-content h1 {
-    font-size: 1.9rem !important;
+    font-size: 1.7rem !important;
   }
 
   .vision-text-side h2 {
