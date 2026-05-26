@@ -1431,7 +1431,7 @@ img {
 
   /* Hero */
   .hero {
-    padding: 140px 0 70px;
+    padding: 120px 0 48px;
     min-height: auto;
   }
 
@@ -1454,6 +1454,12 @@ img {
   .hero-content .subtitle {
     border-left: none;
     padding-left: 0;
+  }
+
+  .hero-english-copy,
+  .hero-actions,
+  .hero-img {
+    display: none !important;
   }
 
   .hero-actions {

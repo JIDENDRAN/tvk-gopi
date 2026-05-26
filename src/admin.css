@@ -581,6 +581,36 @@
 
 /* Responsive adjustments for Phone and Tablet viewports */
 @media (max-width: 768px) {
+  .admin-topbar {
+    padding: 10px 0 !important;
+  }
+  .admin-topbar-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 1rem !important;
+  }
+  .admin-topbar .logo-text {
+    font-size: 1.2rem !important;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .admin-topbar-nav {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    gap: 14px !important;
+    scrollbar-width: none;
+  }
+  .admin-topbar-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .admin-topbar-nav a,
+  .admin-topbar-nav button {
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
   .admin-main {
     padding: 20px 15px;
   }

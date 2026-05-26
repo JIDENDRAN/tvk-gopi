@@ -850,6 +850,21 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 10px 0;
+      }
+
+      header .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
       .page-header {
         padding: 60px 0 50px;
       }
@@ -902,12 +917,21 @@
       }
 
       .nav-links {
-        gap: 10px;
-        flex-wrap: wrap;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        gap: 14px;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
       }
 
       .nav-links a {
-        font-size: 0.65rem;
+        font-size: 0.72rem;
+        white-space: nowrap;
       }
 
       .instagram-panel {

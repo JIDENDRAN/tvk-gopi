@@ -184,6 +184,14 @@
       max-width: 720px;
     }
 
+    .page-header-mobile-note {
+      display: none;
+      margin-top: 18px;
+      font-size: 1.02rem;
+      line-height: 1.72;
+      color: rgba(255, 255, 255, 0.94);
+    }
+
     .page-header-stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -700,8 +708,23 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        padding: 10px 0;
+      }
+
+      header .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 1rem;
+      }
+
+      .logo-text {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
       .page-header {
-        padding: 76px 0 70px;
+        padding: 60px 0 50px;
       }
 
       .page-header-shell,
@@ -719,14 +742,20 @@
         font-size: 1rem;
       }
 
-      .page-header-stats,
-      .overview-metrics {
-        grid-template-columns: 1fr;
+      .page-header-copy > p:not(.page-header-mobile-note) {
+        display: none;
+      }
+
+      .page-header-mobile-note {
+        display: block;
+      }
+
+      .page-header-stats {
+        display: none;
       }
 
       .page-header-panel {
-        justify-self: stretch;
-        width: 100%;
+        display: none;
       }
 
       .values-grid {
@@ -734,12 +763,21 @@
       }
 
       .nav-links {
-        gap: 10px;
-        flex-wrap: wrap;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        gap: 14px;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
       }
 
       .nav-links a {
-        font-size: 0.65rem;
+        font-size: 0.72rem;
+        white-space: nowrap;
       }
     }
 
@@ -803,6 +841,7 @@
             TVK-யின் core values, democratic principles, Tamil identity, technology-driven governance, மற்றும்
             மக்கள் பங்கேற்பை அடிப்படையாகக் கொண்ட அரசியல் பார்வை அனைத்தும் இங்கே தெளிவாக தொகுக்கப்பட்டுள்ளன.
           </p>
+          <p class="page-header-mobile-note tamil-text">TVK எதை நம்புகிறது, எதை முன்னிறுத்துகிறது, எதை அடைய விரும்புகிறது என்பதற்கான தெளிவான வரைபடம்.</p>
           <div class="page-header-stats">
             <div class="page-stat">
               <strong>Vision</strong>
